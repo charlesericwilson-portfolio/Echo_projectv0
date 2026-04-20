@@ -4,7 +4,11 @@ This repo serves as the central hub and origin story for all Echo-related projec
 
 ### Why Echo Was Created
 
-I wanted a **local, uncensored, red-team-focused, general use AI** that could actually help me with real pentesting and system tasks — not just talk about them.
+Most AI agents today are either cloud-dependent, bloated with JSON schemas, or fall apart during long-running CLI tasks. I wanted something better: a **local, lightweight, natural-text agent** that can actually drive real CLI workflows (pentesting, sysadmin, DevOps, or anything else) without needing a datacenter or burning money on API calls.
+
+The entire stack runs on a **single consumer GPU** (~20 GB VRAM, 50k context). No cloud. No JSON overhead. Just a capable local partner.
+
+I wanted a **local, capable, red-team-focused, general use AI** that could actually help me with real pentesting and system tasks, not just talk about them.
 
 So I started with a strong base model ([**Qwen 2.5 Coder 14B Instruct**](https://huggingface.co/Qwen/Qwen2.5-Coder-14B-Instruct)) and fine-tuned it using [**QLoRA**](https://github.com/charlesericwilson-portfolio/Echo_projectv0/blob/main/unsloth_train_gpt.py) on a custom dataset. Check it out here [Echo_training_project](https://github.com/charlesericwilson-portfolio/Echo_training_project)
 
@@ -21,10 +25,12 @@ Because a powerful model alone isn't enough, I had to build custom wrappers and 
 
 ### The Evolution of Projects
 
+I started with a simple idea and iteratively evolved it into a complete, self-improving agent ecosystem across multiple versions:
+
 - **[v1 - Python Simple wrapper](https://github.com/charlesericwilson-portfolio/Echo_agentv1-2/tree/main/Echo_project/python_wrapper)**: The starting point — a basic COMMAND wrapper to give Echo tool-using ability.
 - **[v2 - Rust port of v1](https://github.com/charlesericwilson-portfolio/Echo_agentv1-2/tree/main/Echo_project/echo_rust_wrapper)**: A much faster and cleaner Rust port of the simple COMMAND method.
 - **[v3 - Rust tmux sessions](https://github.com/charlesericwilson-portfolio/Echo_tmux_agentv3)**: The current active version using tmux for reliable persistent sessions and cleaner output capture in testing.
-- **[v4 - Echo_python proxy](https://github.com/charlesericwilson-portfolio/Echo_agent_proxyv4)**: A much more complex version with persistent PTY sessions, heartbeat monitor, database, and summarizer in development.
+- **[v4 - Echo_python proxy](https://github.com/charlesericwilson-portfolio/Echo_agent_proxyv4)**: A much more complex version with persistent tmux sessions, heartbeat monitor, database, and summarizer in development.
 - **[v5 - Echo rust agent proxy](https://github.com/charlesericwilson-portfolio/Echo_rust_agent_proxy)**: The next evolution rust + tmux version of v4 in development.
 
 All of these projects exist for one reason: to give **Echo** (the fine-tuned LLM) the practical ability to use tools effectively and maintain state across sessions in a red-team-friendly or everyday use way.
@@ -41,18 +47,25 @@ Next focus remains on collecting high-quality SESSION vs COMMAND training exampl
 
 Repo remains public and honest about its "in-testing" status.
 
-### Current Traction (as of April 2026)
+## Technical Highlights & Skills Demonstrated
 
-- v1-v2 (early Python versions): 184 unique cloners + 3 YouTube refferals
-- v3 (Echo_tmux): 107 unique cloners
-- v4 (Python proxy): 80 unique cloners + 16 YouTube refferals
-- v5 (Rust hybrid proxy): 123 unique cloners + 14 YouTube refferals (in 2 days)
+- **End-to-end agent architecture** — From simple wrapper to modular proxy with persistent sessions, heartbeat monitoring, and intelligent summarization
+- **Custom model fine-tuning** — Fine-tuned Qwen2.5-Coder 14B using Unsloth + custom randomized interleaved datasets (better generalization than structured data)
+- **Systems programming** — Rust for performance-critical components + Python for rapid prototyping
+- **Practical LLM engineering** — Raw-text tool calling, domain-specific LoRA training, training data pipelines, and prompt engineering for reliable agent behavior
+- **Real-world constraints** — Designed to run entirely locally with low VRAM footprint while maintaining capability
 
-The v0 portfolio page has 42 unique cloners across all repositories.
+### Current Traction (as of April 20, 2026)
+
+- v1-v2 (early Python versions): 235 unique cloners + 4 YouTube refferals
+- v3 (Echo_tmux): 150 unique cloners
+- v4 (Python proxy): 139 unique cloners + 12 YouTube refferals
+- v5 (Rust hybrid proxy): 151 unique cloners + 14 YouTube refferals and 4 Google referrals
+- The [Echo training project](https://github.com/charlesericwilson-portfolio/Echo_training_project): 97 unique cloners + 1 youtube referral 
 
 Early interest is strongest in the simpler raw-text COMMAND and tmux-based versions. v5 is gaining traction quickly. We will be adding databases to v5 next then going to integrate lessons learned to the v4 python version soon.
 
-Future plans Depth pruning a 32B parameter model to 14-18B to be the new brain behind it all as well as creating MLP routing for a Mixture of Adapters architecture.
+Future plans creating MLP routing for a Mixture of Adapters architecture.
 
 Like Cameron Haynes says "Keep Hammering"
 
